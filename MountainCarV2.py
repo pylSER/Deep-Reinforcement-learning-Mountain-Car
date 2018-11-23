@@ -7,6 +7,18 @@ import random
 import numpy as np
 
 
+#############################
+#if you want to use GPU to boost, use these code.  
+
+# import tensorflow as tf
+# import keras
+# config = tf.ConfigProto( device_count = {'GPU': 2 , 'CPU': 1} ) 
+# sess = tf.Session(config=config) 
+# keras.backend.set_session(sess)
+
+#############################
+
+
 class MountainCarTrain:
     def __init__(self,env):
         self.env=env
@@ -54,6 +66,27 @@ class MountainCarTrain:
             action=np.argmax(self.trainNetwork.predict(state)[0])
 
         return action
+
+    
+
+    def trainFromBuffer_Boost(self):
+        if len(self.replayBuffer) < self.numPickFromBuffer:
+            return
+        samples = random.sample(self.replayBuffer,self.numPickFromBuffer)
+        npsamples = np.array(samples)
+        states_temp, actions_temp, rewards_temp, newstates_temp, dones_temp = np.hsplit(npsamples, 5)
+        states = np.concatenate((np.squeeze(states_temp[:])), axis = 0)
+        rewards = rewards_temp.reshape(self.numPickFromBuffer,).astype(float)
+        targets = self.trainNetwork.predict(states)
+        newstates = np.concatenate(np.concatenate(newstates_temp))
+        dones = np.concatenate(dones_temp).astype(bool)
+        notdones = ~dones
+        notdones = notdones.astype(float)
+        dones = dones.astype(float)
+        Q_futures = self.targetNetwork.predict(newstates).max(axis = 1)
+        targets[(np.arange(self.numPickFromBuffer), actions_temp.reshape(self.numPickFromBuffer,).astype(int))] = rewards * dones + (rewards + Q_futures * self.gamma)*notdones
+        self.trainNetwork.fit(states, targets, epochs=1, verbose=0)
+
 
 
     def trainFromBuffer(self):
@@ -118,6 +151,7 @@ class MountainCarTrain:
 
             self.replayBuffer.append([currentState, bestAction, reward, new_state, done])
 
+            #Or you can use self.trainFromBuffer_Boost(), it is a matrix wise version for boosting 
             self.trainFromBuffer()
 
             rewardSum += reward

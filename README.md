@@ -13,13 +13,41 @@ Reinforcement Learning DQN - using OpenAI gym MountainCar
 
 
 
-
-
-
-
 The program in the video is running in macOS(Macbook Air) , and it only took 4.1 minutes to finish training. No GPU used.  
 
+##Using GPU
 
+You can use codes:
+
+````python
+import tensorflow as tf
+import keras
+config = tf.ConfigProto( device_count = {'GPU': 2 , 'CPU': 1} ) 
+sess = tf.Session(config=config) 
+keras.backend.set_session(sess)
+````
+
+and change the trainFromBuffer function to **Boost**
+
+````
+#self.trainFromBuffer()
+self.trainFromBuffer_Boost()
+````
+
+I used a workstation to run GPU version. It took about 2mins to finish training.
+
+##How to test
+
+run `testMountainCar.py`
+
+change the file path in 
+
+````
+#load the network
+model=models.load_model('your model filepath')
+````
+
+Then you can see how the car plays the game.
 
 
 
