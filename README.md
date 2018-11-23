@@ -15,7 +15,7 @@ Reinforcement Learning DQN - using OpenAI gym MountainCar
 
 The program in the video is running in macOS(Macbook Air) , and it only took 4.1 minutes to finish training. No GPU used.  
 
-##Using GPU
+## Using GPU
 
 You can use codes:
 
@@ -36,7 +36,7 @@ self.trainFromBuffer_Boost()
 
 I used a workstation to run GPU version. It took about 2mins to finish training.
 
-##How to test
+## How to test
 
 run `testMountainCar.py`
 
