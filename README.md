@@ -1,6 +1,6 @@
 # A SUPER QUICK way to train MountainCar using DQN
 
-Reinforcement Learning DQN - using OpenAI gym MountainCar
+Reinforcement Learning DQN - using OpenAI gym Mountain Car
 
 - Keras
 - gym
