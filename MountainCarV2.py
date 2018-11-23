@@ -97,10 +97,7 @@ class MountainCarTrain:
         max_position=-99
 
         for i in range(self.iterationNum):
-            if isAcc:
-                bestAction = self.accactions[i]
-            else:
-                bestAction = self.getBestAction(currentState)
+            bestAction = self.getBestAction(currentState)
 
             # env.render()
 
