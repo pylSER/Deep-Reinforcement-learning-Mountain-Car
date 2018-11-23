@@ -17,7 +17,7 @@ Reinforcement Learning DQN - using OpenAI gym MountainCar
 
 
 
-The program in the video is running in macOS(Macbook Air) , and it only took 4.1 minutes to finish training.  
+The program in the video is running in macOS(Macbook Air) , and it only took 4.1 minutes to finish training. No GPU used.  
 
 
 
