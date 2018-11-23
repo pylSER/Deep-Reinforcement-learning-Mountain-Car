@@ -99,7 +99,9 @@ class MountainCarTrain:
         for i in range(self.iterationNum):
             bestAction = self.getBestAction(currentState)
 
-            # env.render()
+            #show the animation every 50 eps
+            if eps%50==0:
+                env.render()
 
             new_state, reward, done, _ = env.step(bestAction)
 
