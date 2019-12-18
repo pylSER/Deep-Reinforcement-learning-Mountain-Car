@@ -165,7 +165,7 @@ class MountainCarTrain:
             print("Failed to finish task in epsoide {}".format(eps))
         else:
             print("Success in epsoide {}, used {} iterations!".format(eps, i))
-            self.trainNetwork.save('./trainNetworkInEPS{}.h5'.format(eps))
+            self.trainNetwork.save('./trainedModel/trainNetworkInEPS{}.h5'.format(eps))
 
         #Sync
         self.targetNetwork.set_weights(self.trainNetwork.get_weights())

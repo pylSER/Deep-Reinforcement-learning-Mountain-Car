@@ -6,7 +6,7 @@ env = gym.make('MountainCar-v0')
 
 #play 20 times
 #load the network
-model=models.load_model('trainNetworkInEPS399.h5')
+model=models.load_model('./trainedModel/trainNetworkInEPS365.h5') ##saved model
 
 for i_episode in range(20):
     currentState = env.reset().reshape(1, 2)
