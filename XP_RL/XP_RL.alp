@@ -8,6 +8,23 @@
 <Model>
 	<Id>1576790646495</Id>
 	<Name><![CDATA[XP_RL]]></Name>
+	<Description><![CDATA[Roadmap::
+
+- change to continous space? 
+
+- overlay map/image
+
+- save and load Q
+
+- UI change: allow parameters on loading page
+
+-> Python
+- DQN in python
+
+-> REST between python and AnyLogic
+
+-> runtime communication between anylogic and python
+]]></Description>
 	<EngineVersion>6</EngineVersion>
 	<JavaPackageName><![CDATA[xp_rl]]></JavaPackageName>
 	<ModelTimeUnit><![CDATA[Second]]></ModelTimeUnit>
