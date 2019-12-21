@@ -88,13 +88,14 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 			<EnvironmentProperties>
 					<EnableSteps>true</EnableSteps>
 					<StepDurationCode Class="CodeUnitValue">
-						<Code><![CDATA[1.0]]></Code>
+						<Code><![CDATA[1]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 					</StepDurationCode>
-					<BeforeStepCode><![CDATA[
+					<BeforeStepCode><![CDATA[// if it is a new episode
 q_Agent.startEpisode();
+
 int action = q_Agent.updateBeforeStep();
-player.step(action);]]></BeforeStepCode>
+]]></BeforeStepCode>
 					<AfterStepCode><![CDATA[q_Agent.observeAfterStep();]]></AfterStepCode>
 					<SpaceType>DISCRETE</SpaceType>
 					<WidthCode><![CDATA[MAP_W]]></WidthCode>
@@ -107,6 +108,7 @@ player.step(action);]]></BeforeStepCode>
 					<LayoutTypeApplyOnStartup>true</LayoutTypeApplyOnStartup>
 					<NetworkType>USER_DEF</NetworkType>
 					<NetworkTypeApplyOnStartup>true</NetworkTypeApplyOnStartup>
+					<ConnectionsPerAgentCode><![CDATA[2]]></ConnectionsPerAgentCode>
 					<ConnectionsRangeCode><![CDATA[50]]></ConnectionsRangeCode>
 					<NeighborLinkFractionCode><![CDATA[0.95]]></NeighborLinkFractionCode>
 					<MCode><![CDATA[10]]></MCode>
@@ -857,7 +859,7 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>false</ShowLabel>
 					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
-					<AutoUpdate>true</AutoUpdate>
+					<AutoUpdate>false</AutoUpdate>
 					<OccurrenceAtTime>true</OccurrenceAtTime>
 					<OccurrenceDate>1576915200000</OccurrenceDate>
 					<OccurrenceTime Class="CodeUnitValue">
@@ -1682,9 +1684,9 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
-						<Type><![CDATA[double[][][]]]></Type>        
+						<Type><![CDATA[double[][]]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[new double[main.MAP_R * main.MAP_C][main.MAP_R * main.MAP_C][NUMBER_OF_ACTIONS]]]></Code>
+							<Code><![CDATA[new double[main.MAP_R * main.MAP_C][NUMBER_OF_ACTIONS]]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -1768,7 +1770,7 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 				<Variable Class="PlainVariable">
 					<Id>1576820659184</Id>
 					<Name><![CDATA[isNewEpisode]]></Name>
-					<X>340</X><Y>220</Y>
+					<X>160</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1795,7 +1797,7 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 				<Variable Class="PlainVariable">
 					<Id>1576851075926</Id>
 					<Name><![CDATA[episode]]></Name>
-					<X>240</X><Y>220</Y>
+					<X>60</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1889,7 +1891,7 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[200]]></Code>
+							<Code><![CDATA[2000]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1576822617414</Id>
@@ -1952,9 +1954,8 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[for (int i = 0; i<main.MAP_R*main.MAP_C; i++)
-	for (int j = 0; j<main.MAP_C*main.MAP_R; j++)
 		for (int k =0 ; k <NUMBER_OF_ACTIONS; k++)
-			Q_Table[i][j][k] = uniform(-40,-20);
+			Q_Table[i][k] = uniform(-1,1);
 			
 ]]></Body>
 				</Function>
@@ -1973,6 +1974,9 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 else
 	action = uniform_discr(0, NUMBER_OF_ACTIONS - 1);
 	
+//we will just let it happen here
+main.player.step(action);	
+
 return action;
 ]]></Body>
 				</Function>
@@ -2012,28 +2016,15 @@ return location;]]></Body>
 						<Name><![CDATA[state]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-					<Body><![CDATA[// get r and c from statec
+					<Body><![CDATA[int argMax_action = 0;
 
-int argMax_state = 0;
-int argMax_action = 0;
+double mx = Q_Table[state][argMax_action];
 
-LinkedList<int[]> next = (LinkedList)getPotentialNextState(state); 
-
-int size = next.size();
-
-argMax_state = (next.get(0))[0];
-argMax_action = (next.get(0))[1];
-
-// traceln(":" + size + ":" + argMax_state + ":" + argMax_action);
-
-double mx = Q_Table[state][argMax_state][argMax_action];
-
-
-for(int i = 0; i < size; i ++){ 
-		if (Q_Table[state][(next.get(i))[0]][(next.get(i))[1]] > mx){
-			mx = Q_Table[state][(next.get(i))[0]][(next.get(i))[1]];	
-			argMax_action= (next.get(i))[1];
-		} 
+for (int j=1; j < NUMBER_OF_ACTIONS; j++){
+	if (Q_Table[state][j] > mx){
+		mx = Q_Table[state][j];	
+		argMax_action = j;
+	} 
 }
 
 return argMax_action;
@@ -2051,7 +2042,7 @@ return argMax_action;
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[if (isNewEpisode) {
 	done = false;
-	total_reward = 0;
+	total_reward = 0; //reset
 	reward = 0;
 
 	state = getRandomState();
@@ -2063,6 +2054,12 @@ return argMax_action;
 	
 	isNewEpisode = false;
 	episode ++;
+	
+	
+	if (episode % 500 == 0){
+		traceln("------" + episode + "-------");
+		printQ();
+	}
 }
 
 if (episode > EPISODES)
@@ -2082,7 +2079,6 @@ if (episode > EPISODES)
 					<Body><![CDATA[// get state
 state_new = main.player.r * main.MAP_C + main.player.c;
 
-
 // if captured the flag
 int flag_state = main.flag.r * main.MAP_C + main.flag.c;
 
@@ -2091,6 +2087,9 @@ double delta = 0;
 if (state_new == flag_state){
 	reward = 100; // get reward
 	total_reward += reward;
+	
+	Q_Table[state][action] = reward;
+	
 	done = true;
 	
 	// endEpisode ;
@@ -2098,18 +2097,26 @@ if (state_new == flag_state){
 
 	EPSILON -= (EPSILON)/EPISODES;
 	
-	epi_awards.add(episode, total_reward);
+	
+	avg_rewards.add(total_reward);
+	
+	//sample avg
+	if (episode % 100 == 0) {
+		epi_awards.add(episode, avg_rewards.mean());		 
+		avg_rewards.reset();
+	
+	}
+	
+	// if (episode % 10 == 0)
+	//	traceln( "Episode: " + episode + " REWARDs: " + total_reward);
 	
 } else {
-	reward = -1; // get reward
+	reward = -10; // get reward
 	
 	
-	delta = LEANRING_RATE * (reward + DISCOUNT * getMaxQ(state, state_new) - getQ_s_a(state, action));
+	delta = LEANRING_RATE * (reward + DISCOUNT * getMaxQ(state_new) - getQ_s_a(state, action));
 	
-	int new_r = (int)(state_new / main.MAP_R);
-	int new_c = state_new % main.MAP_C;
-	
-	Q_Table[new_r][new_c][action] = Q_Table[new_r][new_c][action] + delta;
+	Q_Table[state][action] = Q_Table[state][action] + delta;
 	
 	total_reward += reward;
 	state = state_new;
@@ -2131,18 +2138,14 @@ if (state_new == flag_state){
 						<Name><![CDATA[state]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-					<Parameter>
-						<Name><![CDATA[state2]]></Name>
-						<Type><![CDATA[int]]></Type>
-					</Parameter>
 					<Body><![CDATA[
-double m = Q_Table[state][state2][0]; 
+double m = Q_Table[state][0]; 
 
 int i = 1;
 
 while (i < NUMBER_OF_ACTIONS) {
-	if (Q_Table[state][state2][i] >= m){
-		m = Q_Table[state][state2][i];
+	if (Q_Table[state][i] >= m){
+		m = Q_Table[state][i];
 	}
 	i++;
 }
@@ -2167,11 +2170,7 @@ return m;]]></Body>
 						<Name><![CDATA[action]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-					<Body><![CDATA[int c = state % main.MAP_C;
-
-int r = (int) (state / main.MAP_R);
-
-return Q_Table[r][c][action];]]></Body>
+					<Body><![CDATA[return Q_Table[state][action];]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -2224,13 +2223,15 @@ return nextStates;]]></Body>
 						<Name><![CDATA[state]]></Name>
 						<Type><![CDATA[int]]></Type>
 					</Parameter>
-					<Body><![CDATA[int r = (int) (state / main.MAP_R);
+					<Body><![CDATA[int r = (int) (state / main.MAP_C);
 int c = state % main.MAP_C;
 
 int[] result = new int [2];
 
 result[0] = r;
 result[1] = c;
+
+// traceln("state, r, c::" + state +  ":" + r + ":" + c);
 
 return result;]]></Body>
 				</Function>
@@ -2257,12 +2258,26 @@ return result;]]></Body>
 
 return r*main.MAP_C + c;]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1576890860695</Id>
+					<Name><![CDATA[printQ]]></Name>
+					<X>580</X><Y>400</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[for (int i=0; i < main.MAP_C * main.MAP_R; i++)
+	traceln(i + "::" + Q_Table[i][0] + " : " + Q_Table[i][1] + " : " + Q_Table[i][2] + " : " + Q_Table[i][3]);
+]]></Body>
+				</Function>
 			</Functions>
 			<AnalysisData>
     			<DataSet>
 					<Id>1576870930771</Id>
 					<Name><![CDATA[epi_awards]]></Name>
-					<X>460</X><Y>420</Y>
+					<X>580</X><Y>370</Y>
 					<Label><X>15</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2279,8 +2294,29 @@ return r*main.MAP_C + c;]]></Body>
 						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 					</RecurrenceCode>
 					<FreezeXAxis>false</FreezeXAxis>
-					<SamplesToKeep>1000</SamplesToKeep>
+					<SamplesToKeep>5000</SamplesToKeep>
 				</DataSet>
+    			<Statistics>
+					<Id>1576902195466</Id>
+					<Name><![CDATA[avg_rewards]]></Name>
+					<X>580</X><Y>340</Y>
+					<Label><X>15</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<AutoUpdate>false</AutoUpdate>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1576915200000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code><![CDATA[0]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code><![CDATA[1]]></Code>
+						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
+					</RecurrenceCode>
+					<Discrete>true</Discrete>
+				</Statistics>
 			</AnalysisData>
 			<AgentLinks>
 				<AgentLink>

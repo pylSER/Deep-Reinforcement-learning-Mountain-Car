@@ -1,22 +1,43 @@
 import numpy as np
-import gym
 import matplotlib.pyplot as plt
 
-# Import and initialize Mountain Car Environment
-env = gym.make('MountainCar-v0')
-env.reset()
+def getStateToRC(state):
+    r = state // 6
+    c = state % 6
+    return r, c
+
+def getRCToState(r, c):
+    return int(r*6 + c)
+
+def xp_step(state, action):
+    r, c = getStateToRC(state)
+    if (r>0 and action == 0):
+        r-=1
+    if (r<3 and action == 1):
+        r+=1
+    if (c>1 and action == 2):
+        c-=1
+    if (c<5 and action == 3):
+        c+=1
+
+    state2 = getRCToState(r, c)
+    done = False
+    reward = -10
+    if (state2 == 13):
+        done = True
+        reward = 100
+    return state2, reward, done
+
+env = []
 
 # Define Q-learning function
 def QLearning(env, learning, discount, epsilon, min_eps, episodes):
     # Determine size of discretized state space
-    num_states = (env.observation_space.high - env.observation_space.low)*\
-                    np.array([10, 100])
-    num_states = np.round(num_states, 0).astype(int) + 1
+    num_states = 24
     
     # Initialize Q table
     Q = np.random.uniform(low = -1, high = 1, 
-                          size = (num_states[0], num_states[1], 
-                                  env.action_space.n))
+                          size = (24, 4))
     
     # Initialize variables to track rewards
     reward_list = []
@@ -30,45 +51,30 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
         # Initialize parameters
         done = False
         tot_reward, reward = 0,0
-        state = env.reset()
-        
-        # Discretize state
-        state_adj = (state - env.observation_space.low)*np.array([10, 100])
-        state_adj = np.round(state_adj, 0).astype(int)
+        state = np.random.randint(0, 23)
     
-        while done != True:   
-            # Render environment for last five episodes
-            if i >= (episodes - 5):
-                env.render()
-                
+        while done != True:                  
             # Determine next action - epsilon greedy strategy
             if np.random.random() < 1 - epsilon:
-                action = np.argmax(Q[state_adj[0], state_adj[1]]) 
+                action = np.argmax(Q[state]) 
             else:
-                action = np.random.randint(0, env.action_space.n)
+                action = np.random.randint(0, 3)
                 
             # Get next state and reward
-            state2, reward, done, info = env.step(action) 
-            
-            # Discretize state2
-            state2_adj = (state2 - env.observation_space.low)*np.array([10, 100])
-            state2_adj = np.round(state2_adj, 0).astype(int)
-            
+            state2, reward, done = xp_step(state, action) 
+ 
             #Allow for terminal states
-            if done and state2[0] >= 0.5:
-                Q[state_adj[0], state_adj[1], action] = reward
+            if done:
+                Q[state, action] = reward
                 
             # Adjust Q value for current state
             else:
-                delta = learning*(reward + 
-                                 discount*np.max(Q[state2_adj[0], 
-                                                   state2_adj[1]]) - 
-                                 Q[state_adj[0], state_adj[1], action])
-                Q[state_adj[0], state_adj[1],action] += delta
+                delta = learning * (reward + discount * np.max(Q[state2]) - Q[state, action])
+                Q[state, action] += delta
                                      
             # Update variables
             tot_reward += reward
-            state_adj = state2_adj
+            state = state2
         
         # Decay epsilon
         if epsilon > min_eps:
@@ -85,7 +91,7 @@ def QLearning(env, learning, discount, epsilon, min_eps, episodes):
         if (i+1) % 100 == 0:    
             print('Episode {} Average Reward: {}'.format(i+1, ave_reward))
             
-    env.close()
+    # env.close()
     
     return ave_reward_list
 
@@ -97,5 +103,5 @@ plt.plot(100*(np.arange(len(rewards)) + 1), rewards)
 plt.xlabel('Episodes')
 plt.ylabel('Average Reward')
 plt.title('Average Reward vs Episodes')
-plt.savefig('rewards.jpg')     
-plt.close()  
+# plt.savefig('rewards.jpg')     
+# plt.close()  
