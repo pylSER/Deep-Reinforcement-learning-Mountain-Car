@@ -91,12 +91,16 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 						<Code><![CDATA[1]]></Code>
 						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 					</StepDurationCode>
-					<BeforeStepCode><![CDATA[// if it is a new episode
-q_Agent.startEpisode();
+					<BeforeStepCode><![CDATA[if (enableQL) {
+	// if it is a new episode
+	q_Agent.startEpisode();
 
-int action = q_Agent.updateBeforeStep();
+	int action = q_Agent.updateBeforeStep();
+
+}
 ]]></BeforeStepCode>
-					<AfterStepCode><![CDATA[q_Agent.observeAfterStep();]]></AfterStepCode>
+					<AfterStepCode><![CDATA[if (enableQL)
+	q_Agent.observeAfterStep();]]></AfterStepCode>
 					<SpaceType>DISCRETE</SpaceType>
 					<WidthCode><![CDATA[MAP_W]]></WidthCode>
 					<HeightCode><![CDATA[MAP_H]]></HeightCode>
@@ -202,6 +206,36 @@ int action = q_Agent.updateBeforeStep();
 						<Type><![CDATA[int]]></Type>        
 						<InitialValue Class="CodeValue">
 							<Code><![CDATA[MAP_H / MAP_R]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1576947651555</Id>
+					<Name><![CDATA[enableQL]]></Name>
+					<X>-150</X><Y>540</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[boolean]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1576950239232</Id>
+					<Name><![CDATA[totalScore]]></Name>
+					<X>-150</X><Y>380</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[double]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -390,6 +424,21 @@ int action = q_Agent.updateBeforeStep();
 		setGridCellColor(i, j, randomColor());
 		]]></Body>
 				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>VOID</ReturnModificator>
+					<ReturnType><![CDATA[double]]></ReturnType>
+					<Id>1576950424242</Id>
+					<Name><![CDATA[updateScore]]></Name>
+					<X>-150</X><Y>410</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Body><![CDATA[if (player.r == flag.r && player.c == flag.c)
+	totalScore += 100;
+else 
+	totalScore -= 10;]]></Body>
+				</Function>
 			</Functions>
 			<AgentLinks>
 				<AgentLink>
@@ -514,6 +563,9 @@ int action = q_Agent.updateBeforeStep();
 							<Value Class="CodeValue">
 								<Code><![CDATA[4]]></Code>
 							</Value>
+						</Parameter>
+						<Parameter>
+							<Name><![CDATA[show]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -712,7 +764,9 @@ int action = q_Agent.updateBeforeStep();
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[int r =  player.getR();
 r--;
-player.moveTo(r, player.getC());]]></ActionCode>
+player.moveTo(r, player.getC());
+
+updateScore();]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -735,7 +789,9 @@ player.moveTo(r, player.getC());]]></ActionCode>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[int c =  player.getC();
 c--;
-player.moveTo(player.getR(), c);]]></ActionCode>
+player.moveTo(player.getR(), c);
+
+updateScore();]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -758,7 +814,9 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[int r =  player.getR();
 r++;
-player.moveTo(r, player.getC());]]></ActionCode>
+player.moveTo(r, player.getC());
+
+updateScore();]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -781,7 +839,9 @@ player.moveTo(r, player.getC());]]></ActionCode>
 						<Enabled>true</Enabled>
 						<ActionCode><![CDATA[int c =  player.getC();
 c++;
-player.moveTo(player.getR(), c);]]></ActionCode>
+player.moveTo(player.getR(), c);
+
+updateScore();]]></ActionCode>
 					</BasicProperties>
 					<ExtendedProperties>
 						<Font Name="Dialog" Size="11" Style="0"/>
@@ -810,7 +870,7 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 				<Text>
 					<Id>1576824288793</Id>
 					<Name><![CDATA[text]]></Name>
-					<X>750</X><Y>410</Y>
+					<X>690</X><Y>210</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -832,7 +892,7 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 				<Text>
 					<Id>1576824324412</Id>
 					<Name><![CDATA[text1]]></Name>
-					<X>710</X><Y>420</Y>
+					<X>630</X><Y>210</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -853,7 +913,7 @@ player.moveTo(player.getR(), c);]]></ActionCode>
     			<Plot>
 					<Id>1576871188047</Id>
 					<Name><![CDATA[plot]]></Name>
-					<X>550</X><Y>440</Y>
+					<X>620</X><Y>210</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -871,14 +931,14 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 						<Unit Class="TimeUnits"><![CDATA[SECOND]]></Unit>
 					</RecurrenceCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
-					<Width>420</Width>
+					<Width>380</Width>
 					<Height>160</Height>
 					<BackgroundColor/>
 					<BorderColor/>
 					<ChartArea>
 						<XOffset>50</XOffset>
 						<YOffset>30</YOffset>
-						<Width>340</Width>
+						<Width>300</Width>
 						<Height>70</Height>
 						<BackgroundColor>-1</BackgroundColor>
 						<BorderColor>-16777216</BorderColor>
@@ -915,6 +975,173 @@ player.moveTo(player.getR(), c);]]></ActionCode>
 					<HorScaleToExpression><![CDATA[1]]></HorScaleToExpression>
 					<HorScaleType>AUTO</HorScaleType>
     			</Plot>
+				<Control Type="CheckBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1576947595874</Id>
+					<Name><![CDATA[chkQL]]></Name>
+					<X>630</X><Y>170</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="100" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Q-Learning]]></LabelText>
+						<LinkTo>true</LinkTo>
+						<Link>enableQL</Link>
+	 				</ExtendedProperties>
+				</Control>
+				<Text>
+					<Id>1576948051847</Id>
+					<Name><![CDATA[text2]]></Name>
+					<X>750</X><Y>350</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<VisibleCode><![CDATA[enableQL]]></VisibleCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-8388480</Color>
+					<Text><![CDATA[QL ongoing ....]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>14</Size>
+						<Style>2</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1576949914494</Id>
+					<Name><![CDATA[txtScore]]></Name>
+					<X>540</X><Y>10</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16744448</Color>
+					<Text><![CDATA[]]></Text>
+					<TextCode><![CDATA[totalScore]]></TextCode>
+					<Font>
+						<Name>Trebuchet MS</Name>
+						<Size>20</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Rectangle>
+					<Id>1576950071621</Id>
+					<Name><![CDATA[rectangle]]></Name>
+					<X>620</X><Y>0</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Lock>true</Lock>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-5185306</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>380</Width>
+					<Height>600</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-1917787930</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Text>
+					<Id>1576950326205</Id>
+					<Name><![CDATA[txtScore1]]></Name>
+					<X>470</X><Y>10</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16744448</Color>
+					<Text><![CDATA[SCORE:]]></Text>
+					<Font>
+						<Name>Trebuchet MS</Name>
+						<Size>20</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1576950638697</Id>
+					<Name><![CDATA[txtReset]]></Name>
+					<X>530</X><Y>480</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="70" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[
+totalScore = 0;
+
+q_Agent.episode = 0;
+q_Agent.epi_awards.reset();
+q_Agent.Q_init();
+
+flag.r = uniform_discr(MAP_R -1);
+flag.c = uniform_discr(MAP_C -1);
+flag.setLocation();
+
+player.jumpToRandomEmptyCell();
+player.r = player.getR();
+player.c = player.getC();
+player.moveTo(player.getR(), player.getC());]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Restart]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="CheckBox">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1576951053167</Id>
+					<Name><![CDATA[checkboxShowFlag]]></Name>
+					<X>520</X><Y>430</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="100" Height="30">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="11" Style="0"/>
+						<LabelText><![CDATA[Reveal Flag]]></LabelText>
+						<LinkTo>true</LinkTo>
+						<Link>flag.show</Link>
+	 				</ExtendedProperties>
+				</Control>
 			</Presentation>
 
 				</Level>
@@ -1422,6 +1649,30 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 						</ParameterEditor>
 					</Properties>                 
 				</Variable>
+				<Variable Class="Parameter">
+					<Id>1576950941852</Id>
+					<Name><![CDATA[show]]></Name>
+					<X>60</X><Y>210</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[true]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1576950941850</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
 			</Variables>
 			<Functions>
 				<Function AccessType="default" StaticFunction="false">
@@ -1492,10 +1743,25 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 
 			<Presentation>
+				<Group>
+					<Id>1576951011823</Id>
+					<Name><![CDATA[group]]></Name>
+					<X>10</X><Y>10</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<VisibleCode><![CDATA[show]]></VisibleCode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+
+			<Presentation>
 				<Polyline>
 					<Id>1576815864573</Id>
 					<Name><![CDATA[polyline]]></Name>
-					<X>-10</X><Y>-20</Y>
+					<X>-20</X><Y>-30</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1525,7 +1791,7 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 				<Line>
 					<Id>1576816346551</Id>
 					<Name><![CDATA[line]]></Name>
-					<X>-10</X><Y>30</Y>
+					<X>-20</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1549,7 +1815,7 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 				<Line>
 					<Id>1576817611526</Id>
 					<Name><![CDATA[line1]]></Name>
-					<X>-11</X><Y>30</Y>
+					<X>-21</X><Y>20</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1570,6 +1836,9 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 					<Dy>-50</Dy>
 					<Dz>0</Dz>
 				</Line>
+			</Presentation>
+
+				</Group>
 			</Presentation>
 
 				</Level>
@@ -2057,8 +2326,8 @@ return argMax_action;
 	
 	
 	if (episode % 500 == 0){
-		traceln("------" + episode + "-------");
-		printQ();
+		//traceln("------" + episode + "-------");
+		//printQ();
 	}
 }
 
@@ -2436,6 +2705,50 @@ return r*main.MAP_C + c;]]></Body>
 			<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
 
 			<Presentation>
+				<Rectangle>
+					<Id>1576953351194</Id>
+					<Name><![CDATA[rectangle]]></Name>
+					<X>0</X><Y>0</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-16777216</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1000</Width>
+					<Height>600</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>1840246510</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
+				<Image>
+					<Id>1576953298792</Id>
+					<Name><![CDATA[image]]></Name>
+					<X>100</X><Y>80</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Width>790</Width>
+					<Height>480</Height>
+					<Rotation>0.0</Rotation>
+					<ImageFiles>
+						<ImageResourceReference>
+							<PackageName><![CDATA[xp_rl]]></PackageName>
+							<ClassName><![CDATA[cover.png]]></ClassName>
+						</ImageResourceReference>
+					</ImageFiles>
+					<OriginalSize>false</OriginalSize>
+				</Image>
 				<Text>
 					<Id>0</Id>
 					<Name><![CDATA[text]]></Name>
@@ -2449,7 +2762,7 @@ return r*main.MAP_C + c;]]></Body>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
 					<Color>-12490271</Color>
-					<Text><![CDATA[XP_RL]]></Text>
+					<Text><![CDATA[Reinforcement Learning Example: Capture a flag]]></Text>
 					<Font>
 						<Name>SansSerif</Name>
 						<Size>24</Size>
@@ -2493,5 +2806,11 @@ return r*main.MAP_C + c;]]></Body>
 			</ModelTimeProperties>
 		</SimulationExperiment>	
 	</Experiments>
+	<ModelResources>
+		<Resource>
+			<Path><![CDATA[cover.png]]></Path>
+			<ReferencedFromUserCode>false</ReferencedFromUserCode>
+		</Resource>
+	</ModelResources>
 </Model>
 </AnyLogicWorkspace>
