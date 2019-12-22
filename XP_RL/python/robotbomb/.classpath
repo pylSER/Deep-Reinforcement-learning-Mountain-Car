@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="target/generated-sources/annotations">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="model.jar"/>
+	<classpathentry kind="lib" path="lib/com.anylogic.engine.jar"/>
+	<classpathentry kind="lib" path="lib/com.anylogic.engine.nl.jar"/>
+	<classpathentry kind="lib" path="lib/com.anylogic.engine.sa.jar"/>
+	
+	<classpathentry kind="lib" path="lib/database/querydsl/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="lib/database/querydsl/querydsl-core-4.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/database/querydsl/querydsl-sql-4.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/database/querydsl/querydsl-sql-codegen-4.2.1.jar"/>
+
+	<classpathentry kind="lib" path="lib/sa/com.anylogic.engine.sa.web.jar"/>
+	<classpathentry kind="lib" path="lib/sa/executor-basic-8.3.jar"/>
+	<classpathentry kind="lib" path="lib/sa/ioutil-8.3.jar"/>
+	<classpathentry kind="lib" path="lib/sa/util-8.3.jar"/>
+	
+	<classpathentry kind="lib" path="lib/sa/spark/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jackson-annotations-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jackson-core-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jackson-databind-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jackson-datatype-jsr310-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-client-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-http-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-io-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-security-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-server-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-servlet-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-servlets-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-util-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-webapp-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jetty-xml-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/jsch-0.1.54.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/slf4j-api-1.7.21.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/spark-core-2.7.2.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/websocket-api-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/websocket-client-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/websocket-common-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/websocket-server-9.4.8.v20171121.jar"/>
+	<classpathentry kind="lib" path="lib/sa/spark/websocket-servlet-9.4.8.v20171121.jar"/>
+	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="m2e-apt" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
