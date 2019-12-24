@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.79.0 commit date:2017-09-11, commit time:10:43, hash:5bd8ac9</authoring_tool>
+    </contributor>
+    <created>2018-04-11T11:48:21</created>
+    <modified>2018-04-11T11:48:21</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_cameras>
+    <camera id="Viewpoint-camera" name="Viewpoint">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov sid="xfov">45.0001</xfov>
+            <aspect_ratio>1.777778</aspect_ratio>
+            <znear sid="znear">0.1</znear>
+            <zfar sid="zfar">100</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+      <extra>
+        <technique profile="blender">
+          <shiftx sid="shiftx" type="float">0</shiftx>
+          <shifty sid="shifty" type="float">0</shifty>
+          <YF_dofdist sid="YF_dofdist" type="float">0</YF_dofdist>
+        </technique>
+      </extra>
+    </camera>
+  </library_cameras>
+  <library_images/>
+  <library_effects>
+    <effect id="YFLAME-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0.6666667 0.6666667 0.6666667 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.8 0.8 0 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">358</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 0.7</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="Shape_005-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0.35 0.35 0.35 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.8 0 0 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">256</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 0.6</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="YFLAME-material" name="YFLAME">
+      <instance_effect url="#YFLAME-effect"/>
+    </material>
+    <material id="Shape_005-material" name="Shape_005">
+      <instance_effect url="#Shape_005-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="YFLAME_Extrusion-mesh" name="YFLAME_Extrusion">
+      <mesh>
+        <source id="YFLAME_Extrusion-mesh-positions">
+          <float_array id="YFLAME_Extrusion-mesh-positions-array" count="168">-0.1 0 0 -0.06999999 0 0.06999999 0 0 0.1 0.06999999 0 0.06999999 0.1 0 0 0.06999999 0 -0.06999999 0 0 -0.1 -0.06999999 0 -0.06999999 -0.3 0.2 0 -0.21 0.2 0.21 0 0.2 0.3 0.21 0.2 0.21 0.3 0.2 0 0.21 0.2 -0.21 0 0.2 -0.3 -0.21 0.2 -0.21 -0.5 0.5 0 -0.35 0.5 0.35 0 0.5 0.5 0.35 0.5 0.35 0.5 0.5 0 0.35 0.5 -0.35 0 0.5 -0.5 -0.35 0.5 -0.35 -0.5 0.6 0 -0.35 0.6 0.35 0 0.6 0.5 0.35 0.6 0.35 0.5 0.6 0 0.35 0.6 -0.35 0 0.6 -0.5 -0.35 0.6 -0.35 -0.3 1 0 -0.21 1 0.21 0 1 0.3 0.21 1 0.21 0.3 1 0 0.21 1 -0.21 0 1 -0.3 -0.21 1 -0.21 -0.1 1.5 0 -0.06999999 1.5 0.06999999 0 1.5 0.1 0.06999999 1.5 0.06999999 0.1 1.5 0 0.06999999 1.5 -0.06999999 0 1.5 -0.1 -0.06999999 1.5 -0.06999999 -0.000999987 2 0 -7e-4 2 7e-4 0 2 0.000999987 7e-4 2 7e-4 0.000999987 2 0 7e-4 2 -7e-4 0 2 -0.000999987 -7e-4 2 -7e-4</float_array>
+          <technique_common>
+            <accessor source="#YFLAME_Extrusion-mesh-positions-array" count="56" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="YFLAME_Extrusion-mesh-normals">
+          <float_array id="YFLAME_Extrusion-mesh-normals-array" count="282">0 -1 0 -0.6767156 -0.6767155 0.290021 -0.290021 -0.6767156 0.6767156 0.290021 -0.6767156 0.6767156 0.6767155 -0.6767157 0.290021 0.6767156 -0.6767155 -0.290021 0.290021 -0.6767156 -0.6767156 -0.290021 -0.6767156 -0.6767156 -0.6767155 -0.6767157 -0.290021 -0.7837131 -0.5224755 0.335877 -0.335877 -0.5224754 0.7837131 0.335877 -0.5224753 0.7837131 0.7837131 -0.5224753 0.335877 0.7837131 -0.5224755 -0.335877 0.335877 -0.5224754 -0.7837131 -0.335877 -0.5224753 -0.7837131 -0.7837131 -0.5224753 -0.335877 -0.9191451 0 0.3939192 -0.3939195 0 0.9191449 0.3939194 0 0.9191451 0.9191451 0 0.3939192 0.9191451 0 -0.3939192 0.3939195 0 -0.9191449 -0.3939194 0 -0.9191451 -0.9191451 0 -0.3939192 -0.83517 0.4175851 0.35793 -0.3579297 0.4175851 0.83517 0.3579302 0.417585 0.83517 0.83517 0.417585 0.3579301 0.83517 0.4175851 -0.35793 0.3579297 0.4175851 -0.83517 -0.3579302 0.417585 -0.83517 -0.83517 0.417585 -0.3579301 -0.8626867 0.3450746 0.3697232 -0.3697229 0.3450748 0.8626868 0.3697229 0.3450747 0.8626869 0.8626869 0.3450748 0.3697226 0.8626867 0.3450746 -0.3697232 0.3697229 0.3450748 -0.8626868 -0.3697229 0.3450747 -0.8626869 -0.8626869 0.3450748 -0.3697226 -0.9042916 0.1790497 0.3875539 -0.3875494 0.1790452 0.9042944 0.3875536 0.1790497 0.9042916 0.9043138 0.1790547 0.3874997 0.9042916 0.1790497 -0.3875539 0.3875494 0.1790452 -0.9042944 -0.3875536 0.1790497 -0.9042916 -0.9043138 0.1790547 -0.3874997 0 1 0 -0.6767155 -0.6767157 0.290021 -0.290021 -0.6767156 0.6767156 0.290021 -0.6767156 0.6767156 0.6767156 -0.6767155 0.290021 0.6767155 -0.6767157 -0.290021 0.290021 -0.6767156 -0.6767156 -0.290021 -0.6767156 -0.6767156 -0.6767156 -0.6767155 -0.290021 -0.7837131 -0.5224753 0.335877 -0.335877 -0.5224753 0.7837131 0.335877 -0.5224754 0.7837131 0.7837131 -0.5224755 0.335877 0.7837131 -0.5224753 -0.335877 0.335877 -0.5224753 -0.7837131 -0.335877 -0.5224754 -0.7837131 -0.7837131 -0.5224755 -0.335877 -0.3939191 0 0.9191452 0.3939192 0 0.9191452 0.3939191 0 -0.9191452 -0.3939192 0 -0.9191452 -0.83517 0.417585 0.3579301 -0.3579302 0.417585 0.83517 0.3579297 0.4175851 0.83517 0.83517 0.4175851 0.35793 0.83517 0.417585 -0.3579301 0.3579302 0.417585 -0.83517 -0.3579297 0.4175851 -0.83517 -0.83517 0.4175851 -0.35793 -0.8626869 0.3450748 0.3697226 -0.3697229 0.3450747 0.8626869 0.3697229 0.3450748 0.8626868 0.8626867 0.3450746 0.3697232 0.8626869 0.3450748 -0.3697226 0.3697229 0.3450747 -0.8626869 -0.3697229 0.3450748 -0.8626868 -0.8626867 0.3450746 -0.3697232 -0.9043138 0.1790547 0.3874997 -0.3875536 0.1790497 0.9042916 0.3875494 0.1790452 0.9042944 0.9042916 0.1790497 0.3875539 0.9043138 0.1790547 -0.3874997 0.3875536 0.1790497 -0.9042916 -0.3875494 0.1790452 -0.9042944 -0.9042916 0.1790497 -0.3875539</float_array>
+          <technique_common>
+            <accessor source="#YFLAME_Extrusion-mesh-normals-array" count="94" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="YFLAME_Extrusion-mesh-vertices">
+          <input semantic="POSITION" source="#YFLAME_Extrusion-mesh-positions"/>
+        </vertices>
+        <triangles material="YFLAME-material" count="108">
+          <input semantic="VERTEX" source="#YFLAME_Extrusion-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#YFLAME_Extrusion-mesh-normals" offset="1"/>
+          <p>3 0 1 0 5 0 0 1 9 1 8 1 2 2 9 2 1 2 2 3 11 3 10 3 4 4 11 4 3 4 4 5 13 5 12 5 6 6 13 6 5 6 6 7 15 7 14 7 0 8 15 8 7 8 8 9 17 9 16 9 10 10 17 10 9 10 10 11 19 11 18 11 12 12 19 12 11 12 12 13 21 13 20 13 14 14 21 14 13 14 14 15 23 15 22 15 8 16 23 16 15 16 17 17 24 17 16 17 18 18 25 18 17 18 19 19 26 19 18 19 20 20 27 20 19 20 21 21 28 21 20 21 22 22 29 22 21 22 23 23 30 23 22 23 16 24 31 24 23 24 25 25 32 25 24 25 25 26 34 26 33 26 27 27 34 27 26 27 27 28 36 28 35 28 29 29 36 29 28 29 29 30 38 30 37 30 31 31 38 31 30 31 31 32 32 32 39 32 33 33 40 33 32 33 33 34 42 34 41 34 35 35 42 35 34 35 35 36 44 36 43 36 37 37 44 37 36 37 37 38 46 38 45 38 39 39 46 39 38 39 39 40 40 40 47 40 41 41 48 41 40 41 41 42 50 42 49 42 43 43 50 43 42 43 43 44 52 44 51 44 45 45 52 45 44 45 45 46 54 46 53 46 47 47 54 47 46 47 47 48 48 48 55 48 51 49 53 49 55 49 0 0 7 0 1 0 6 0 5 0 7 0 4 0 3 0 5 0 2 0 1 0 3 0 7 0 5 0 1 0 0 50 1 50 9 50 2 51 10 51 9 51 2 52 3 52 11 52 4 53 12 53 11 53 4 54 5 54 13 54 6 55 14 55 13 55 6 56 7 56 15 56 0 57 8 57 15 57 8 58 9 58 17 58 10 59 18 59 17 59 10 60 11 60 19 60 12 61 20 61 19 61 12 62 13 62 21 62 14 63 22 63 21 63 14 64 15 64 23 64 8 65 16 65 23 65 17 17 25 17 24 17 18 66 26 66 25 66 19 67 27 67 26 67 20 20 28 20 27 20 21 21 29 21 28 21 22 68 30 68 29 68 23 69 31 69 30 69 16 24 24 24 31 24 25 70 33 70 32 70 25 71 26 71 34 71 27 72 35 72 34 72 27 73 28 73 36 73 29 74 37 74 36 74 29 75 30 75 38 75 31 76 39 76 38 76 31 77 24 77 32 77 33 78 41 78 40 78 33 79 34 79 42 79 35 80 43 80 42 80 35 81 36 81 44 81 37 82 45 82 44 82 37 83 38 83 46 83 39 84 47 84 46 84 39 85 32 85 40 85 41 86 49 86 48 86 41 87 42 87 50 87 43 88 51 88 50 88 43 89 44 89 52 89 45 90 53 90 52 90 45 91 46 91 54 91 47 92 55 92 54 92 47 93 40 93 48 93 55 49 48 49 49 49 49 49 50 49 51 49 51 49 52 49 53 49 53 49 54 49 55 49 55 49 49 49 51 49</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="Shape_Extrusion-mesh" name="Shape_Extrusion">
+      <mesh>
+        <source id="Shape_Extrusion-mesh-positions">
+          <float_array id="Shape_Extrusion-mesh-positions-array" count="168">-0.1 0 0 -0.06999999 0 0.06999999 0 0 0.1 0.06999999 0 0.06999999 0.1 0 0 0.06999999 0 -0.06999999 0 0 -0.1 -0.06999999 0 -0.06999999 -0.3 0.2 0 -0.21 0.2 0.21 0 0.2 0.3 0.21 0.2 0.21 0.3 0.2 0 0.21 0.2 -0.21 0 0.2 -0.3 -0.21 0.2 -0.21 -0.5 0.5 0 -0.35 0.5 0.35 0 0.5 0.5 0.35 0.5 0.35 0.5 0.5 0 0.35 0.5 -0.35 0 0.5 -0.5 -0.35 0.5 -0.35 -0.5 0.6 0 -0.35 0.6 0.35 0 0.6 0.5 0.35 0.6 0.35 0.5 0.6 0 0.35 0.6 -0.35 0 0.6 -0.5 -0.35 0.6 -0.35 -0.3 1 0 -0.21 1 0.21 0 1 0.3 0.21 1 0.21 0.3 1 0 0.21 1 -0.21 0 1 -0.3 -0.21 1 -0.21 -0.1 1.5 0 -0.06999999 1.5 0.06999999 0 1.5 0.1 0.06999999 1.5 0.06999999 0.1 1.5 0 0.06999999 1.5 -0.06999999 0 1.5 -0.1 -0.06999999 1.5 -0.06999999 -0.000999987 2 0 -7e-4 2 7e-4 0 2 0.000999987 7e-4 2 7e-4 0.000999987 2 0 7e-4 2 -7e-4 0 2 -0.000999987 -7e-4 2 -7e-4</float_array>
+          <technique_common>
+            <accessor source="#Shape_Extrusion-mesh-positions-array" count="56" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Shape_Extrusion-mesh-normals">
+          <float_array id="Shape_Extrusion-mesh-normals-array" count="282">0 -1 0 -0.6767156 -0.6767155 0.290021 -0.290021 -0.6767156 0.6767156 0.290021 -0.6767156 0.6767156 0.6767155 -0.6767157 0.290021 0.6767156 -0.6767155 -0.290021 0.290021 -0.6767156 -0.6767156 -0.290021 -0.6767156 -0.6767156 -0.6767155 -0.6767157 -0.290021 -0.7837131 -0.5224755 0.335877 -0.335877 -0.5224754 0.7837131 0.335877 -0.5224753 0.7837131 0.7837131 -0.5224753 0.335877 0.7837131 -0.5224755 -0.335877 0.335877 -0.5224754 -0.7837131 -0.335877 -0.5224753 -0.7837131 -0.7837131 -0.5224753 -0.335877 -0.9191451 0 0.3939192 -0.3939195 0 0.9191449 0.3939194 0 0.9191451 0.9191451 0 0.3939192 0.9191451 0 -0.3939192 0.3939195 0 -0.9191449 -0.3939194 0 -0.9191451 -0.9191451 0 -0.3939192 -0.83517 0.4175851 0.35793 -0.3579297 0.4175851 0.83517 0.3579302 0.417585 0.83517 0.83517 0.417585 0.3579301 0.83517 0.4175851 -0.35793 0.3579297 0.4175851 -0.83517 -0.3579302 0.417585 -0.83517 -0.83517 0.417585 -0.3579301 -0.8626867 0.3450746 0.3697232 -0.3697229 0.3450748 0.8626868 0.3697229 0.3450747 0.8626869 0.8626869 0.3450748 0.3697226 0.8626867 0.3450746 -0.3697232 0.3697229 0.3450748 -0.8626868 -0.3697229 0.3450747 -0.8626869 -0.8626869 0.3450748 -0.3697226 -0.9042916 0.1790497 0.3875539 -0.3875494 0.1790452 0.9042944 0.3875536 0.1790497 0.9042916 0.9043138 0.1790547 0.3874997 0.9042916 0.1790497 -0.3875539 0.3875494 0.1790452 -0.9042944 -0.3875536 0.1790497 -0.9042916 -0.9043138 0.1790547 -0.3874997 0 1 0 -0.6767155 -0.6767157 0.290021 -0.290021 -0.6767156 0.6767156 0.290021 -0.6767156 0.6767156 0.6767156 -0.6767155 0.290021 0.6767155 -0.6767157 -0.290021 0.290021 -0.6767156 -0.6767156 -0.290021 -0.6767156 -0.6767156 -0.6767156 -0.6767155 -0.290021 -0.7837131 -0.5224753 0.335877 -0.335877 -0.5224753 0.7837131 0.335877 -0.5224754 0.7837131 0.7837131 -0.5224755 0.335877 0.7837131 -0.5224753 -0.335877 0.335877 -0.5224753 -0.7837131 -0.335877 -0.5224754 -0.7837131 -0.7837131 -0.5224755 -0.335877 -0.3939191 0 0.9191452 0.3939192 0 0.9191452 0.3939191 0 -0.9191452 -0.3939192 0 -0.9191452 -0.83517 0.417585 0.3579301 -0.3579302 0.417585 0.83517 0.3579297 0.4175851 0.83517 0.83517 0.4175851 0.35793 0.83517 0.417585 -0.3579301 0.3579302 0.417585 -0.83517 -0.3579297 0.4175851 -0.83517 -0.83517 0.4175851 -0.35793 -0.8626869 0.3450748 0.3697226 -0.3697229 0.3450747 0.8626869 0.3697229 0.3450748 0.8626868 0.8626867 0.3450746 0.3697232 0.8626869 0.3450748 -0.3697226 0.3697229 0.3450747 -0.8626869 -0.3697229 0.3450748 -0.8626868 -0.8626867 0.3450746 -0.3697232 -0.9043138 0.1790547 0.3874997 -0.3875536 0.1790497 0.9042916 0.3875494 0.1790452 0.9042944 0.9042916 0.1790497 0.3875539 0.9043138 0.1790547 -0.3874997 0.3875536 0.1790497 -0.9042916 -0.3875494 0.1790452 -0.9042944 -0.9042916 0.1790497 -0.3875539</float_array>
+          <technique_common>
+            <accessor source="#Shape_Extrusion-mesh-normals-array" count="94" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Shape_Extrusion-mesh-vertices">
+          <input semantic="POSITION" source="#Shape_Extrusion-mesh-positions"/>
+        </vertices>
+        <triangles material="Shape_005-material" count="108">
+          <input semantic="VERTEX" source="#Shape_Extrusion-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Shape_Extrusion-mesh-normals" offset="1"/>
+          <p>3 0 1 0 5 0 0 1 9 1 8 1 2 2 9 2 1 2 2 3 11 3 10 3 4 4 11 4 3 4 4 5 13 5 12 5 6 6 13 6 5 6 6 7 15 7 14 7 0 8 15 8 7 8 8 9 17 9 16 9 10 10 17 10 9 10 10 11 19 11 18 11 12 12 19 12 11 12 12 13 21 13 20 13 14 14 21 14 13 14 14 15 23 15 22 15 8 16 23 16 15 16 17 17 24 17 16 17 18 18 25 18 17 18 19 19 26 19 18 19 20 20 27 20 19 20 21 21 28 21 20 21 22 22 29 22 21 22 23 23 30 23 22 23 16 24 31 24 23 24 25 25 32 25 24 25 25 26 34 26 33 26 27 27 34 27 26 27 27 28 36 28 35 28 29 29 36 29 28 29 29 30 38 30 37 30 31 31 38 31 30 31 31 32 32 32 39 32 33 33 40 33 32 33 33 34 42 34 41 34 35 35 42 35 34 35 35 36 44 36 43 36 37 37 44 37 36 37 37 38 46 38 45 38 39 39 46 39 38 39 39 40 40 40 47 40 41 41 48 41 40 41 41 42 50 42 49 42 43 43 50 43 42 43 43 44 52 44 51 44 45 45 52 45 44 45 45 46 54 46 53 46 47 47 54 47 46 47 47 48 48 48 55 48 51 49 53 49 55 49 0 0 7 0 1 0 6 0 5 0 7 0 4 0 3 0 5 0 2 0 1 0 3 0 7 0 5 0 1 0 0 50 1 50 9 50 2 51 10 51 9 51 2 52 3 52 11 52 4 53 12 53 11 53 4 54 5 54 13 54 6 55 14 55 13 55 6 56 7 56 15 56 0 57 8 57 15 57 8 58 9 58 17 58 10 59 18 59 17 59 10 60 11 60 19 60 12 61 20 61 19 61 12 62 13 62 21 62 14 63 22 63 21 63 14 64 15 64 23 64 8 65 16 65 23 65 17 17 25 17 24 17 18 66 26 66 25 66 19 67 27 67 26 67 20 20 28 20 27 20 21 21 29 21 28 21 22 68 30 68 29 68 23 69 31 69 30 69 16 24 24 24 31 24 25 70 33 70 32 70 25 71 26 71 34 71 27 72 35 72 34 72 27 73 28 73 36 73 29 74 37 74 36 74 29 75 30 75 38 75 31 76 39 76 38 76 31 77 24 77 32 77 33 78 41 78 40 78 33 79 34 79 42 79 35 80 43 80 42 80 35 81 36 81 44 81 37 82 45 82 44 82 37 83 38 83 46 83 39 84 47 84 46 84 39 85 32 85 40 85 41 86 49 86 48 86 41 87 42 87 50 87 43 88 51 88 50 88 43 89 44 89 52 89 45 90 53 90 52 90 45 91 46 91 54 91 47 92 55 92 54 92 47 93 40 93 48 93 55 49 48 49 49 49 49 49 50 49 51 49 51 49 52 49 53 49 53 49 54 49 55 49 55 49 49 49 51 49</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Viewpoint" name="Viewpoint" type="NODE">
+        <matrix sid="transform">0.9950042 0 0.09983332 0.5 0 1 0 0 -0.09983332 0 0.9950042 8 0 0 0 1</matrix>
+        <instance_camera url="#Viewpoint-camera"/>
+      </node>
+      <node id="YFLAME_Extrusion" name="YFLAME_Extrusion" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#YFLAME_Extrusion-mesh" name="YFLAME_Extrusion">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="YFLAME-material" target="#YFLAME-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Shape_Extrusion" name="Shape_Extrusion" type="NODE">
+        <matrix sid="transform">0.9 0 0 0 0 0.7 0 0 0 0 0.9 0 0 0 0 1</matrix>
+        <instance_geometry url="#Shape_Extrusion-mesh" name="Shape_Extrusion">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="Shape_005-material" target="#Shape_005-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="YFLAME_Extrusion_001" name="YFLAME_Extrusion_001" type="NODE">
+        <matrix sid="transform">0.6 0 0 0.2 0 0.7 0 0.2 0 0 0.6 0.2 0 0 0 1</matrix>
+        <instance_geometry url="#YFLAME_Extrusion-mesh" name="YFLAME_Extrusion_001">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="YFLAME-material" target="#YFLAME-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="YFLAME_Extrusion_002" name="YFLAME_Extrusion_002" type="NODE">
+        <matrix sid="transform">0.6 0 0 0.2 0 0.7 0 0.2 0 0 0.6 -0.2 0 0 0 1</matrix>
+        <instance_geometry url="#YFLAME_Extrusion-mesh" name="YFLAME_Extrusion_002">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="YFLAME-material" target="#YFLAME-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="YFLAME_Extrusion_003" name="YFLAME_Extrusion_003" type="NODE">
+        <matrix sid="transform">0.6 0 0 -0.2 0 0.7 0 0.2 0 0 0.6 0.2 0 0 0 1</matrix>
+        <instance_geometry url="#YFLAME_Extrusion-mesh" name="YFLAME_Extrusion_003">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="YFLAME-material" target="#YFLAME-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="YFLAME_Extrusion_004" name="YFLAME_Extrusion_004" type="NODE">
+        <matrix sid="transform">0.6 0 0 -0.2 0 0.7 0 0.2 0 0 0.6 -0.2 0 0 0 1</matrix>
+        <instance_geometry url="#YFLAME_Extrusion-mesh" name="YFLAME_Extrusion_004">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="YFLAME-material" target="#YFLAME-material"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
