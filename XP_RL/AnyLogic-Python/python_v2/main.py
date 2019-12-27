@@ -143,8 +143,8 @@ def simulation():
         '/Library/Java/JavaVirtualMachines/',
         'jdk-13.0.1.jdk/Contents/Home/bin/java',
         '-Dfile.encoding=UTF-8',
-        '@/var/folders/gg/1jfz30d15h309vq0rylkp93m0000gp/',
-        'T/cp_bgvg9i0bj6tak80vcnkoyhqii.argfile',
+        '@/var/folders/gg/1jfz30d15h309vq0rylkp93m0000gp/T',
+        '/cp_bgvg9i0bj6tak80vcnkoyhqii.argfile',
         'p.App'
     ]
     

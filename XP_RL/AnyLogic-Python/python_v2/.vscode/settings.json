@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/louis/.pyenv/versions/3.7.2/Python.framework/Versions/3.7/bin/python3.7",
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true
