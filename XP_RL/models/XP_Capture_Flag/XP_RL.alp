@@ -4,7 +4,7 @@
 	         AnyLogic Project File 
 *************************************************	         
 -->
-<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.5.1.201910011746" AlpVersion="8.4.9">
+<AnyLogicWorkspace WorkspaceVersion="1.9" AnyLogicVersion="8.5.1.201910011758" AlpVersion="8.4.9">
 <Model>
 	<Id>1576790646495</Id>
 	<Name><![CDATA[XP_RL]]></Name>
@@ -253,7 +253,7 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[4]]></Code>
+							<Code><![CDATA[8]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1576810009290</Id>
@@ -277,7 +277,7 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[6]]></Code>
+							<Code><![CDATA[12]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1576810033899</Id>
@@ -349,7 +349,7 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 						<UnitType><![CDATA[NONE]]></UnitType>
 						<SdArray>false</SdArray>
 						<DefaultValue Class="CodeValue">
-							<Code><![CDATA[0.99]]></Code>
+							<Code><![CDATA[0.95]]></Code>
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1576815643567</Id>
@@ -422,7 +422,7 @@ player.moveTo(player.getR(), player.getC());]]></StartupCode>
 					<ShowLabel>true</ShowLabel>
 					<Body><![CDATA[for (int i=0; i<MAP_C; i++)
 	for (int j=0; j<MAP_R; j++)
-		setGridCellColor(i, j, randomColor());
+		setGridCellColor(i, j, randomColor()); //randomColor() ; lawnGreen
 		]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
@@ -643,6 +643,9 @@ else
 						<Parameter>
 							<Name><![CDATA[NUMBER_OF_ACTIONS]]></Name>
 						</Parameter>
+						<Parameter>
+							<Name><![CDATA[MAX_STEPS]]></Name>
+						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
 					<Replication Class="CodeValue">
@@ -861,8 +864,11 @@ updateScore();]]></ActionCode>
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
+					<ScaleXCode><![CDATA[0.5]]></ScaleXCode>
+					<ScaleYCode><![CDATA[0.5]]></ScaleYCode>
+					<ScaleZCode><![CDATA[0.5]]></ScaleZCode>
 					<DrawingMode>POSITION_WITH_OFFSET</DrawingMode>
-					<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+					<ScaleType>DEFINED_EXPLICITLY</ScaleType>
 					<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
 					<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
 					<Latitude>0.0</Latitude>
@@ -1440,9 +1446,9 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 					<EmbeddedIcon>false</EmbeddedIcon>
 					<Z>0</Z>
 					<Rotation>0.0</Rotation>
-					<ScaleXCode><![CDATA[3]]></ScaleXCode>
-					<ScaleYCode><![CDATA[3]]></ScaleYCode>
-					<ScaleZCode><![CDATA[3]]></ScaleZCode>
+					<ScaleXCode><![CDATA[1.5]]></ScaleXCode>
+					<ScaleYCode><![CDATA[1.5]]></ScaleYCode>
+					<ScaleZCode><![CDATA[1.5]]></ScaleZCode>
 
 			<Presentation>
 				<Curve ControlPoints="true">
@@ -2076,6 +2082,21 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 						<Type><![CDATA[int]]></Type>        
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1578030034586</Id>
+					<Name><![CDATA[step_number]]></Name>
+					<X>170</X><Y>410</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1576818581911</Id>
 					<Name><![CDATA[EPSILON]]></Name>
@@ -2189,6 +2210,30 @@ this.setXY(this.getX() + main.canvasScale_W/2, this.getY() + main.canvasScale_H/
 						</DefaultValue>
 						<ParameterEditor>
 							<Id>1576850798182</Id>
+							<EditorContolType>TEXT_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1578029957445</Id>
+					<Name><![CDATA[MAX_STEPS]]></Name>
+					<X>60</X><Y>250</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[int]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[500]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1578029957443</Id>
 							<EditorContolType>TEXT_BOX</EditorContolType>
 							<MinSliderValue><![CDATA[0]]></MinSliderValue>
 							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
@@ -2314,6 +2359,7 @@ return argMax_action;
 	done = false;
 	total_reward = 0; //reset
 	reward = 0;
+	step_number = 0;
 
 	state = getRandomState();
 	
@@ -2346,7 +2392,9 @@ if (episode > EPISODES)
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
-					<Body><![CDATA[// get state
+					<Body><![CDATA[step_number++;
+
+// get state
 state_new = main.player.r * main.MAP_C + main.player.c;
 
 // if captured the flag
@@ -2354,8 +2402,12 @@ int flag_state = main.flag.r * main.MAP_C + main.flag.c;
 
 double delta = 0;
 
-if (state_new == flag_state){
-	reward = 100; // get reward
+if (state_new == flag_state || step_number == MAX_STEPS){
+	if (state_new == flag_state)
+		reward = 100; // get reward
+	else
+		reward = -10;
+		
 	total_reward += reward;
 	
 	Q_Table[state][action] = reward;
@@ -2391,6 +2443,7 @@ if (state_new == flag_state){
 	total_reward += reward;
 	state = state_new;
 }
+
 
 ]]></Body>
 				</Function>
