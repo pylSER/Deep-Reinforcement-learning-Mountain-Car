@@ -6,6 +6,8 @@ keywords: DQN Mountain Car Deep Reinforcement learning OpenAI gym
 
 <meta name='DQN Mountain Car' content='Deep Reinforcement learning OpenAI gym quick'>  -->
 
+I found a new generation audio edit website: www.voicefloat.com
+
 
 # A SUPER QUICK way to train Mountain Car using DQN
 
